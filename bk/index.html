@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <meta content="utf-8" http-equiv="encoding" />
+    <title>BK reserver</title>
+    <style>
+      .container {
+        display: grid;
+        grid-template-columns: max-content max-content;
+        margin: 0;
+        height: 100%;
+      }
+
+      .calendar {
+        width: 1000px;
+      }
+
+      .calendar .header {
+        display: grid;
+        grid-template-columns: auto max-content;
+        padding: 0 20px;
+      }
+
+      .calendar .header .refresh-button {
+        align-self: center;
+        cursor: pointer;
+        color: #17a2b8;
+        letter-spacing: 0.07rem;
+        font-size: 0.8rem;
+      }
+
+      .calendar .header .refresh-button:hover {
+        text-decoration: underline;
+      }
+
+      .calendar iframe {
+        width: 100%;
+        height: 595px;
+      }
+
+      .opening-hours {
+        margin: 260px 1rem 0;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/ejs@3.1.6/ejs.min.js"></script>
+    <script type="text/javascript">
+      const data = [
+        {
+          name: "Konala",
+          frameId: "kiipeilysessio-konala-1",
+          openingHours: {
+            week: [10, 21],
+            sat: [12, 18],
+            sun: [12, 18],
+          },
+        },
+        {
+          name: "Espoo",
+          frameId: "kiipeilysessio-espoo-1",
+          openingHours: {
+            week: [12, 21],
+            sat: [10, 18],
+            sun: [10, 18],
+          },
+        },
+        {
+          name: "Pasila",
+          frameId: "kiipeilysessio-pasila-1",
+          openingHours: {
+            week: [10, 21],
+            sat: [12, 18],
+            sun: [12, 18],
+          },
+        },
+        {
+          name: "Herttoniemi",
+          frameId: "kiipeilysessio-herttoniemi",
+          openingHours: {
+            week: [12, 21],
+            sat: [12, 18],
+            sun: [12, 18],
+          },
+        },
+        {
+          name: "Kino",
+          frameId: "kiipeilysessio-lauttasaari-1",
+          openingHours: {
+            week: [14, 20],
+            sat: [12, 18],
+            sun: [12, 18],
+          },
+        },
+      ];
+    </script>
+    <script type="text/ejs" id="calendar-template">
+      <div class="calendar">
+        <div class="header">
+          <h1><%= item.name %></h1>
+          <span class="refresh-button" onClick="helpers.refreshFrame('<%- item.frameId %>')">Refresh</span>
+        </div>
+        <iframe
+          id="<%= item.frameId %>"
+          frameborder="0"
+          src="<%= helpers.getFrameUrl(item.frameId) %>">
+        </iframe>
+      </div>
+    </script>
+    <script type="text/ejs" id="opening-hours-template">
+      <div class="opening-hours">
+        <h4>Aukioloajat</h4>
+        <p>
+          ma - pe <%= item.openingHours.week.join('-') %><br />
+          la <%= item.openingHours.sat.join('-') %><br />
+          su <%= item.openingHours.sun.join('-') %><br />
+        </p>
+      </div>
+    </script>
+    <script type="text/ejs" id="site-template">
+      <div class="container">
+        <% data.forEach(function(d) { %>
+          <%- templates.calendar({ item: d, helpers }) %>
+          <%- templates.openingHours({ item: d, helpers }) %>
+        <% }) %>
+      </div>
+    </script>
+    <script type="text/javascript">
+      const helpers = {
+        loadTemplate: (id) =>
+          ejs.compile(document.getElementById(id).innerText, { client: true }),
+        getFrameUrl: (frameId) =>
+          `https://tools2.boulderkeskus.com/t/embed/rental/${frameId}?bgcolor=ffffff&start_expanded=true&height=400`,
+        refreshFrame: (frameId) => (document.getElementById(frameId).src += ""),
+      };
+
+      window.helpers = helpers;
+
+      window.onload = function () {
+        const templates = {
+          site: helpers.loadTemplate("site-template"),
+          calendar: helpers.loadTemplate("calendar-template"),
+          openingHours: helpers.loadTemplate("opening-hours-template"),
+        };
+        document.getElementById("app").innerHTML = templates.site({
+          data,
+          templates,
+          helpers,
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
