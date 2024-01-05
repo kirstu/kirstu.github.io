@@ -1,0 +1,73 @@
+# defaults: https://github.com/MichaIng/DietPi/blob/master/dietpi.txt
+
+# enable auto setup
+AUTO_SETUP_AUTOMATED=1
+AUTO_SETUP_AUTOSTART_LOGIN_USER=root
+# global password [!]
+AUTO_SETUP_GLOBAL_PASSWORD=password
+
+# -----------------------------------------------------------------------------
+# Language/Regional options
+# -----------------------------------------------------------------------------
+
+AUTO_SETUP_LOCALE=fi_FI.UTF-8
+AUTO_SETUP_KEYBOARD_LAYOUT=fi
+AUTO_SETUP_TIMEZONE=Europe/Helsinki
+
+# -----------------------------------------------------------------------------
+# Network options
+# -----------------------------------------------------------------------------
+
+AUTO_SETUP_NET_HOSTNAME=rasp
+AUTO_SETUP_NET_USESTATIC=1
+AUTO_SETUP_NET_STATIC_GATEWAY=192.168.0.1
+AUTO_SETUP_NET_STATIC_IP=192.168.0.88
+CONFIG_ENABLE_IPV6=0
+
+# -----------------------------------------------------------------------------
+# Misc options
+# -----------------------------------------------------------------------------
+
+# disable swap
+AUTO_SETUP_SWAPFILE_SIZE=0
+
+# disable HDMI/video output and framebuffers
+AUTO_SETUP_HEADLESS=1
+
+# post-install and configuration
+AUTO_SETUP_CUSTOM_SCRIPT_EXEC=https://raw.githubusercontent.com/denis-g/rpi4-pihole-settings/master/dietpi-install.sh
+
+# DietPi-Survey: 1=opt in | 0=opt out | -1=ask on first call
+# - https://dietpi.com/docs/dietpi_tools/#miscellaneous (see tab 'DietPi Survey')
+SURVEY_OPTED_IN=0
+
+# -----------------------------------------------------------------------------
+# Software options
+# -----------------------------------------------------------------------------
+
+# dependency preferences
+# Lighttpd
+AUTO_SETUP_WEB_SERVER_INDEX=-2
+# No browser
+AUTO_SETUP_BROWSER_INDEX=0
+
+# software to automatically install
+# Unbound
+AUTO_SETUP_INSTALL_SOFTWARE_ID=182
+# Pihole
+AUTO_SETUP_INSTALL_SOFTWARE_ID=93
+
+
+# -----------------------------------------------------------------------------
+# Misc DietPi program settings
+# -----------------------------------------------------------------------------
+
+# disable obtain information regarding your system and installed software
+SURVEY_OPTED_IN=0
+
+# -----------------------------------------------------------------------------
+# DietPi-Config settings
+# -----------------------------------------------------------------------------
+
+# disable IPv6
+CONFIG_ENABLE_IPV6=0
