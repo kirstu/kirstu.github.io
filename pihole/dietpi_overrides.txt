@@ -34,8 +34,7 @@ AUTO_SETUP_SWAPFILE_SIZE=0
 AUTO_SETUP_HEADLESS=1
 
 # post-install and configuration
-AUTO_SETUP_CUSTOM_SCRIPT_EXEC=https://raw.githubusercontent.com/kirstu/kirstu.github.io/master/pihole/post_install.sh
-
+AUTO_SETUP_CUSTOM_SCRIPT_EXEC=https://raw.githubusercontent.com/kirstu/kirstu.github.io/master/pihole/dietpi_post_install.sh
 
 # -----------------------------------------------------------------------------
 # Software options
@@ -48,10 +47,14 @@ AUTO_SETUP_WEB_SERVER_INDEX=-2
 AUTO_SETUP_BROWSER_INDEX=0
 
 # software to automatically install
+# Lighttpd
+AUTO_SETUP_INSTALL_SOFTWARE_ID=84
+# SQLite
+AUTO_SETUP_INSTALL_SOFTWARE_ID=87
+# PHP
+AUTO_SETUP_INSTALL_SOFTWARE_ID=89
 # Unbound
 AUTO_SETUP_INSTALL_SOFTWARE_ID=182
-# Pihole
-AUTO_SETUP_INSTALL_SOFTWARE_ID=93
 
 # -----------------------------------------------------------------------------
 # DietPi-Config settings
